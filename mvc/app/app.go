@@ -2,7 +2,7 @@ package app
 
 import (
 	"net/http"
-	"https://github.com/adamita/golang_first/mvc/app/controllers"
+	"github.com/adamita/golang_first/mvc/controllers"
 )
 
 func StartApp(){
