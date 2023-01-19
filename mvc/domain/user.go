@@ -1,4 +1,4 @@
-package domain
+package app
 
 type User struct{
 	Id uint64
