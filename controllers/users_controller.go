@@ -2,6 +2,6 @@ package controllers
 
 import "net/http"
 
-func GetUser(resp http.Response, req *http.Request){
+func GetUser(resp http.ResponseWriter, req *http.Request){
 
 }
