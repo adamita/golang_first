@@ -4,7 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
-	"github.com/adamita/golang_first/mvc/controllers"
+
+	"github.com/adamita/first/controllers"
 )
 
 func StartApp() {
