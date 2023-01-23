@@ -6,21 +6,29 @@ import (
 	"strconv"
 
 	"github.com/adamita/first/services"
+	"github.com/adamita/first/utils"
 )
 
 func GetUser(resp http.ResponseWriter, req *http.Request) {
 	userIdParam := req.URL.Query().Get("user_id")
 	userId, err := (strconv.ParseInt(userIdParam, 10, 64))
-	if err != nil {
-		resp.WriteHeader(http.StatusNotFound)
-		resp.Write([]byte("user_id must be a number"))
+	if err != nil {	
+		apiErr := &utils.ApplicationError{
+			Message:    "user_id must be a number",
+			StatusCode: http.StatusBadRequest,
+			Code:       "bad_request",
+		}	
+		jsonValue, _ := json.Marshal(apiErr)
+		resp.WriteHeader(apiErr.StatusCode)
+		resp.Write(jsonValue)
 		return
 	}
 
-	user, err := services.GetUser(userId)
-	if err != nil {
-		resp.WriteHeader(http.StatusNotFound)
-		resp.Write([]byte(err.Error()))
+	user, apiErr := services.GetUser(userId)
+	if apiErr != nil {
+		jsonValue, _ := json.Marshal(apiErr)
+		resp.WriteHeader(apiErr.StatusCode)
+		resp.Write(jsonValue)
 		return
 	}
 
